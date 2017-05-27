@@ -13,8 +13,7 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
-  # Define function to set the value of the matrix. It also clears the old
-  # inverse from the cache
+  
   set <- function(y) {
     x <<- y    # Set the value
     m <<- NULL # Clear the cache
