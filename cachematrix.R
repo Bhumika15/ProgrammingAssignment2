@@ -1,8 +1,4 @@
-## These functions introduce a special matrix object which caches its inverse.
-## The create such a special matrix m you execute \code{m <- makeCacheMatrix(x)}
-## where x is an ordinary matrix. You can then get the value with \code{m$get()}
-## and change the value with \code{m$set(y)} where y is an ordinary matrix.
-## You can get the inverse with \code{cacheSolve(m)}.
+
 
 #' Create a special "matrix" object that can cache its inverse.
 #' 
@@ -20,8 +16,7 @@ makeCacheMatrix <- function(x = matrix()) {
   }
   # Define function to get the value of the matrix
   get <- function() x
-  # Define function to set the inverse. This is only used by getinverse() when
-  # there is no cached inverse
+ 
   setInverse <- function(inverse) m <<- inverse
   # Define function to get the inverse
   getInverse <- function() m
@@ -34,12 +29,8 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 #' Return inverse of matrix x
-#' 
-#' This function computes the inverse of the special "matrix" returned by 
-#' makeCacheMatrix above. If the inverse has already been calculated 
-#' (and the matrix has not changed), then the cachesolve retrieves the 
-#' inverse from the cache.
-#' 
+
+
 #' @param x a special matrix created with makeCacheMatrix
 #' 
 #' @return The inverse of the matrix x
@@ -52,7 +43,7 @@ cacheSolve <- function(x, ...) {
     message("getting cached data")
     return(m)
   }
-  # The cache was empty. We need to calculate it, cache it, and then return it.
+  
   data <- x$get()  # Get value of matrix
   m <- solve(data) # Calculate inverse
   x$setInverse(m)  # Cache the result
